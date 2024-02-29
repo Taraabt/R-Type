@@ -83,9 +83,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 6164697724413458057, guid: de134675ce728f74d8dc1c88e265ec3d, type: 3}
   player: {fileID: 4714900583055768570, guid: d5e3ba616b76629409a94a054bb77797, type: 3}
-  totalHp: 3
-  shootingTime: 1
-  enemySpeed: 3
+  totalHp: 1
+  shootingTime: 0.5
+  enemySpeed: 10
   enemyBullet: {fileID: -5750733902339492815, guid: f45dce9765045a14aa850007ee2a48ca, type: 3}
 --- !u!212 &8780143810426067077
 SpriteRenderer:

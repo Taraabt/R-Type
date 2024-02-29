@@ -82,7 +82,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  proiettiliPowerUp: 3
 --- !u!212 &5374991841542907379
 SpriteRenderer:
   m_ObjectHideFlags: 0

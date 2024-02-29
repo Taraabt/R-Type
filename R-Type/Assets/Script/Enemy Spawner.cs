@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
         if(remainingTime<=0)
         {
             remainingTime = spawnTime;
-            Vector2 pos = new Vector2(transform.position.x, Random.Range(-5, +5));
+            Vector2 pos = new Vector2(transform.position.x, Random.Range(-4.5f, +4.5f));
             GameObject instance;
             instance = Instantiate(enemy, pos, Quaternion.identity);
         }

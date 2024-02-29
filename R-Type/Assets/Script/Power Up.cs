@@ -8,15 +8,18 @@ public class PowerUp : MonoBehaviour
 
     [SerializeField] PlayerMovement player;
     int nBullet => player.nBullet;
-    [SerializeField] int proiettiliPowerUp;
+    int proiettiliPowerUp;
     public delegate void Activation();
     public static event Activation ActivePowerUp;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        UsePowerUp();
-        Destroy(this.gameObject);
+        if (collision.gameObject==player.gameObject)
+        {
+            UsePowerUp();
+            Destroy(this.gameObject);
+        }
     }
 
 
@@ -31,6 +34,10 @@ public class PowerUp : MonoBehaviour
     public void UsePowerUp()
     {
         player.nBullet = proiettiliPowerUp;
+    }
+    private void Start()
+    {
+        proiettiliPowerUp=Random.Range(2,5);
     }
 
 
