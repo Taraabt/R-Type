@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1c3e7024e628247b5644d36c546c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 6164697724413458057, guid: de134675ce728f74d8dc1c88e265ec3d, type: 3}
   player: {fileID: 4714900583055768570, guid: d5e3ba616b76629409a94a054bb77797, type: 3}
-  hp: 0
+  powerUp: {fileID: 3571824721024306603, guid: 93edc113f99f30a4b90e2bee06d2a07e, type: 3}
+  totalHp: 0
+  shootingTime: 0
+  enemySpeed: 0
+  enemyBullet: {fileID: -5750733902339492815, guid: f45dce9765045a14aa850007ee2a48ca, type: 3}

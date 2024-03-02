@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 48596799754685553}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.99, y: 0.23, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -81,11 +81,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a191fdbaa5c323d4e83a81619e302fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 6164697724413458057, guid: de134675ce728f74d8dc1c88e265ec3d, type: 3}
   player: {fileID: 4714900583055768570, guid: d5e3ba616b76629409a94a054bb77797, type: 3}
+  powerUp: {fileID: 3571824721024306603, guid: 93edc113f99f30a4b90e2bee06d2a07e, type: 3}
   totalHp: 1
   shootingTime: 0.5
-  enemySpeed: 10
+  enemySpeed: 6.5
   enemyBullet: {fileID: -5750733902339492815, guid: f45dce9765045a14aa850007ee2a48ca, type: 3}
 --- !u!212 &8780143810426067077
 SpriteRenderer:
