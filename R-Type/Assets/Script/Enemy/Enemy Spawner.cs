@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
 {
 
     [SerializeField] GameObject enemy;
+    [SerializeField] Button button;
     [SerializeField] float spawnTime;
     [SerializeField] PlayerMovement player;
     float remainingTime = 0;
@@ -18,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if (player.playerHp > 0)
+        if (player.playerHp > 0 && button.canMove)
         {
             remainingTime -= Time.deltaTime;
             if (remainingTime <= 0)

@@ -7,6 +7,7 @@ public class MoveCamera : MonoBehaviour
 
     [SerializeField]Button button;
     public bool canMove =>button.canMove;
+    [SerializeField] float cameraSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,7 @@ public class MoveCamera : MonoBehaviour
     {
         if (canMove)
         {
-            transform.Translate(Vector2.right*Time.deltaTime*);
+            transform.Translate(Vector2.right*Time.deltaTime * cameraSpeed);
         }
 
 

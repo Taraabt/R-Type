@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
@@ -7,10 +8,11 @@ using static UnityEditor.PlayerSettings;
 public class PlayerMovement : MonoBehaviour
 {
 
+    [SerializeField] TMP_Text text;
+    [SerializeField] Canvas canvas;
     public delegate void Death();
     public static event Death OnDeath;
     [SerializeField] Bullet bullet;
-    //[SerializeField] Enemy enemy;
     [SerializeField] float shootDelay;
     Rigidbody2D rb;
     float xMove, yMove;
@@ -19,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float playerSpeed;
     [SerializeField]public int playerHp { get; set; }
     [SerializeField]public int nBullet { get; set; }
+    [SerializeField] Button button;
 
     void Start()
     {
@@ -30,6 +33,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        string vitaPlayer=playerHp.ToString();
+        text.text = "Hp:" + vitaPlayer;
+
+
+
+
         remainingTime -= Time.deltaTime;
         Debug.Log(playerHp);
         if (playerHp <= 0)
@@ -37,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("You are dead");
             KillPlayer();
             //end the game 
-        }else{
+        }else if(button.canMove){
             xMove = Input.GetAxis("Horizontal");
             yMove = Input.GetAxis("Vertical");
 
@@ -126,6 +135,8 @@ public class PlayerMovement : MonoBehaviour
     }
     public void KillPlayer()
     {
+        canvas.gameObject.SetActive(true);
+        button.canMove = false;
         Debug.Log("Death");
     }
 
