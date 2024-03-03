@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a191fdbaa5c323d4e83a81619e302fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  move: 0.4
   player: {fileID: 4714900583055768570, guid: d5e3ba616b76629409a94a054bb77797, type: 3}
   powerUp: {fileID: 3571824721024306603, guid: 93edc113f99f30a4b90e2bee06d2a07e, type: 3}
   totalHp: 1

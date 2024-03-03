@@ -3,21 +3,27 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using static UnityEditor.PlayerSettings;
 
 public class PlayerMovement : MonoBehaviour
 {
 
-    [SerializeField] TMP_Text text;
+    [SerializeField] TMP_Text hp;
+    [SerializeField] TMP_Text scoreText;
+
     [SerializeField] Canvas canvas;
-    public delegate void Death();
-    public static event Death OnDeath;
+    public delegate void PlayerDeath();
+    [SerializeField] Enemy enemy;
+    public static event PlayerDeath OnDeath;
     [SerializeField] Bullet bullet;
     [SerializeField] float shootDelay;
     Rigidbody2D rb;
     float xMove, yMove;
     bool shoot;
     float remainingTime;
+    public int score;
+    
     [SerializeField] float playerSpeed;
     [SerializeField]public int playerHp { get; set; }
     [SerializeField]public int nBullet { get; set; }
@@ -25,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        score = 0;
         remainingTime = shootDelay;
         nBullet = 1;
         playerHp = 10;
@@ -33,8 +40,13 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        string vitaPlayer=playerHp.ToString();
-        text.text = "Hp:" + vitaPlayer;
+
+        scoreText.text ="Score: "+ score;
+        if (playerHp<0)
+        {
+            playerHp=0;
+        }
+        hp.text = "Hp:" + playerHp.ToString();
 
 
 
@@ -43,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log(playerHp);
         if (playerHp <= 0)
         {
-            Debug.Log("You are dead");
             KillPlayer();
             //end the game 
         }else if(button.canMove){
@@ -52,7 +63,6 @@ public class PlayerMovement : MonoBehaviour
 
             rb.velocity = new Vector2(xMove, yMove) * playerSpeed;
             shoot = Input.GetKey(KeyCode.Space);
-            Debug.Log(shoot);
             if (remainingTime <= 0)
             {
                 remainingTime = shootDelay;
@@ -63,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void AddBullet()
     {
-        nBullet= Random.Range(2, 4);
+        nBullet= Random.Range(2, 5);
     }
 
 
@@ -76,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (collision.gameObject.GetComponent<Enemy>() != null)
         {
+            score++;
             playerHp -= 3;
         }
     }
@@ -131,13 +142,12 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnDisable()
     {
-        OnDeath += KillPlayer;
+        OnDeath -= KillPlayer;
     }
     public void KillPlayer()
     {
         canvas.gameObject.SetActive(true);
         button.canMove = false;
-        Debug.Log("Death");
     }
 
 

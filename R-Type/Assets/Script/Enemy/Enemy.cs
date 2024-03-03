@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Enemy : MonoBehaviour
 {
 
+    [SerializeField]float move;
     [SerializeField] PlayerMovement player;
     [SerializeField] PowerUp powerUp;
     [SerializeField] protected int totalHp;
     protected int currentHp;
     [SerializeField] protected float shootingTime;
-    [SerializeField] protected float enemySpeed;
+    [SerializeField] public float enemySpeed;
     [SerializeField] protected EnemyBullet enemyBullet;
     float remainingTime;
 
@@ -21,10 +24,14 @@ public class Enemy : MonoBehaviour
         remainingTime = shootingTime;
         transform.Translate(Vector2.left * Time.deltaTime * enemySpeed);
     }
+
     private void Update()
     {
+
+
         if(currentHp<=0){
-            if(Random.Range(0,3)==2)
+
+            if (Random.Range(0,3)==2)
             {
                 Instantiate(powerUp, transform.position,Quaternion.identity);
             }
@@ -33,7 +40,8 @@ public class Enemy : MonoBehaviour
         CheckOut();
         Vector3 pos = new Vector2(transform.position.x - 0.1f, transform.position.y);
         remainingTime -= Time.deltaTime;
-        transform.Translate(Vector2.left * Time.deltaTime * enemySpeed);
+
+        transform.Translate(new Vector2(-1f, move * Mathf.Sin(Time.time)) * Time.deltaTime * enemySpeed);
         if (remainingTime <= 0)
         {
             remainingTime = shootingTime;
@@ -64,7 +72,6 @@ public class Enemy : MonoBehaviour
             currentHp = 0;
         }
     }
-
 
 
 

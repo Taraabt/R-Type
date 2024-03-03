@@ -6,17 +6,22 @@ public class Bullet : MonoBehaviour
 {
 
     [SerializeField] float bulletSpeed;
+    GameObject player;
 
-    private void Awake()
-    {
-    }
     void Start()
     {
+        player = GameObject.Find("Player");
         transform.Translate(Vector2.right);
     }
     void Update()
     {
         transform.Translate(Vector2.right * Time.deltaTime * bulletSpeed);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Enemy>()!=null) {
+            player.GetComponent<PlayerMovement>().score++;
+        }
     }
 
 }
