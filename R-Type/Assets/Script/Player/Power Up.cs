@@ -6,12 +6,13 @@ public class PowerUp : MonoBehaviour
 {
 
     [SerializeField] float powerUpSpeed;
-    [SerializeField] PlayerMovement player;
+    [SerializeField] GameObject player;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<PlayerMovement>()!=null)
         {
+            player.GetComponent<PlayerMovement>().powerUpTime=2;
             Destroy(this.gameObject);
         }
     }
@@ -19,6 +20,7 @@ public class PowerUp : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.Find("Player");
         transform.Translate(Vector2.left * Time.deltaTime * powerUpSpeed);
     }
     private void Update()

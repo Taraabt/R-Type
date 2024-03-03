@@ -4,7 +4,6 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
-using static UnityEditor.PlayerSettings;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -21,8 +20,9 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     float xMove, yMove;
     bool shoot;
-    float remainingTime;
+    float shootingTime;
     public int score;
+    public float powerUpTime;
     
     [SerializeField] float playerSpeed;
     [SerializeField]public int playerHp { get; set; }
@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         score = 0;
-        remainingTime = shootDelay;
+        shootingTime = shootDelay;
         nBullet = 1;
         playerHp = 10;
         rb = GetComponent<Rigidbody2D>();
@@ -49,9 +49,9 @@ public class PlayerMovement : MonoBehaviour
         hp.text = "Hp:" + playerHp.ToString();
 
 
+        powerUpTime-=Time.deltaTime;
 
-
-        remainingTime -= Time.deltaTime;
+        shootingTime -= Time.deltaTime;
         Debug.Log(playerHp);
         if (playerHp <= 0)
         {
@@ -63,9 +63,9 @@ public class PlayerMovement : MonoBehaviour
 
             rb.velocity = new Vector2(xMove, yMove) * playerSpeed;
             shoot = Input.GetKey(KeyCode.Space);
-            if (remainingTime <= 0)
+            if (shootingTime <= 0)
             {
-                remainingTime = shootDelay;
+                shootingTime = shootDelay;
                 ShootBullet();
             }
         }
@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
             Bullet instance;
             instance = Instantiate(bullet, pos, Quaternion.identity);
         }
-        else if (shoot && nBullet > 1)
+        else if (shoot && nBullet > 1&&powerUpTime>0)
         {
             Bullet instance;
             if (nBullet % 2 == 0)
@@ -134,6 +134,10 @@ public class PlayerMovement : MonoBehaviour
                     instance.transform.rotation = quaternion;
                 }
             }
+        }
+        else
+        {
+            nBullet = 1;
         }
     }
     private void OnEnable()

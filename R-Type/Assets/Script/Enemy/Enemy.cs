@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -9,7 +8,7 @@ public class Enemy : MonoBehaviour
 {
 
     [SerializeField]float move;
-    [SerializeField] PlayerMovement player;
+    GameObject player;
     [SerializeField] PowerUp powerUp;
     [SerializeField] protected int totalHp;
     protected int currentHp;
@@ -20,6 +19,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.Find("Player");
         currentHp = totalHp;
         remainingTime = shootingTime;
         transform.Translate(Vector2.left * Time.deltaTime * enemySpeed);
@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
             {
                 Instantiate(powerUp, transform.position,Quaternion.identity);
             }
+            player.GetComponent<PlayerMovement>().score++;
             Destroy(gameObject);
         }
         CheckOut();
